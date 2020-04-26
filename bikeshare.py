@@ -37,6 +37,7 @@ def get_filters():
         print("Please enter one of the following: all, monday, tuesday, wednesday, thursday, friday, saturday, or sunday: ")
         day = input().lower()
 
+    #print statement prints out '-' 40 times to create a horizontal line across the terminal clearly marking new subject
     print('-'*40)
 
     #JP: Tell user what they selected for filters
@@ -76,6 +77,8 @@ def load_data(city, month, day):
             print(df.iloc[x:x+5])
             x += 5
             print_more = input("Would you like to see the next 5 rows of data? yes or no: \n")
+
+    #print statement prints out '-' 40 times to create a horizontal line across the terminal clearly marking new subject
     print('-'*40)
 
 
@@ -144,6 +147,8 @@ def time_stats(df):
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
+
+    #print statement prints out '-' 40 times to create a horizontal line across the terminal clearly marking new subject
     print('-'*40)
 
 
@@ -172,6 +177,8 @@ def station_stats(df):
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
+
+    #print statement prints out '-' 40 times to create a horizontal line across the terminal clearly marking new subject
     print('-'*40)
 
 
@@ -192,6 +199,8 @@ def trip_duration_stats(df):
     print("Average travel time in seconds: ", mean_trip_duration)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
+
+    #print statement prints out '-' 40 times to create a horizontal line across the terminal clearly marking new subject
     print('-'*40)
 
 
@@ -204,8 +213,7 @@ def user_stats(df):
     # TO DO: Display counts of user types
     #JP to grader: code for counts of user types from Practice Problem #2 (edits to remove extraneous output)
     user_types = df['User Type'].value_counts().to_frame()
-    print("Count of user types: \n",user_types)
-    print("\n")
+    print("Count of user types: \n",user_types, "\n")
 
     # TO DO: Display counts of gender
     #JP: only gender data for 2 cities, below code tries to run calculation, if the selected city does not have the Gender column, it will tell the user there is no data
@@ -214,8 +222,7 @@ def user_stats(df):
     except:
         print("Sorry, there is no gender data for this city!")
     else:
-        print("Count of gender: \n",gender_count)
-        print("\n")
+        print("Count of gender: \n",gender_count, "\n")
 
     # TO DO: Display earliest, most recent, and most common year of birth
     #JP: only Birth Date data for 2 cities, below code tries to run calculation, if the selected city does not have the Birth Year column, it will tell the user there is no data
@@ -230,6 +237,8 @@ def user_stats(df):
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
+
+    #print statement prints out '-' 40 times to create a horizontal line across the terminal clearly marking new subject
     print('-'*40)
 
 
