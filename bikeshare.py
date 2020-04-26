@@ -182,7 +182,13 @@ def station_stats(df):
 
 
 def trip_duration_stats(df):
-    """Displays statistics on the total and average trip duration."""
+    """Displays statistics on the total and average trip duration.
+
+    Local Variables:
+    start_time - holds start time of function call in order to calculate function duration stat
+    total_duration - summation of Trip Duration column
+    mean_trip_duration - mean trip time calculated
+    """
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
