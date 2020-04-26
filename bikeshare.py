@@ -38,11 +38,11 @@ def get_filters():
         day = input().lower()
 
     print('-'*40)
-    
+
     #JP: Tell user what they selected for filters
     print("You chose to filter by the city: {}, in the month of: {}, on the day of the week: {}".format(city.title(), month.title(), day.title()))
-   
-    
+
+
     print('-'*40)
     return city, month, day
 
@@ -61,29 +61,29 @@ def load_data(city, month, day):
     """
     #JP: read data for selected city, month, day
     df = pd.read_csv(CITY_DATA[city])
-    
+
     #JP: ask the user if they want to see the raw data
     print_data = input("Would you like to see the first 5 rows of data? yes or no: \n")
     x = 5
     #JP: if user says yes, show the first 5 rows
     if print_data == "yes":
         print(df[:x])
-        
+
         #JP: ask the user if they want to see the next 5 rows of data
         print_more = input("Would you like to see the next 5 rows of data? yes or no: \n")
         #JP:if the user says yes, print the next 5 rows, then ask again and continue until they say no
         while print_more == "yes":
-            print(df[x:x+5])
+            print(df.iloc[x:x+5])
             x += 5
             print_more = input("Would you like to see the next 5 rows of data? yes or no: \n")
     print('-'*40)
-    
-    
-    
+
+
+
 #---------------------------------------------------------------------------------
 #JP note to grader: code encolsed in "-" is taken from Practice Problem #3
 
-    # convert the Start Time column to datetime 
+    # convert the Start Time column to datetime
     #JP:(converts to datetime dataype)
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -97,11 +97,11 @@ def load_data(city, month, day):
     #JP:if user did not choose to look at all months Jan - Jun...
     if month != 'all':
         # use the index of the months list to get the corresponding int
-        #JP: months is set to the months in the df and then given an index 
+        #JP: months is set to the months in the df and then given an index
         #JP: for ex january is index = 0 so month = 1
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month)+1
-    
+
         # filter by month to create the new dataframe
         #JP: filter df to only show month where month is selected month by user
         df = df[df['month']==month]
@@ -113,7 +113,7 @@ def load_data(city, month, day):
         #JP: filter df to only show where day_of_week is selected day from user
         df = df[df['day_of_week']==day.title()]
  #---------------------------------------------------------------------------------
-   
+
 
     return df
 
@@ -129,12 +129,12 @@ def time_stats(df):
     months = ['january', 'february', 'march', 'april', 'may', 'june']
     most_common_month = df['month'].value_counts().idxmax()
     print("Most common month: ", months[most_common_month-1].title())
-    
+
     # TO DO: display the most common day of week
     #JP: find most common day
     most_common_day = df['day_of_week'].value_counts().idxmax()
     print("Most common day of week: ", most_common_day)
-    
+
     # TO DO: display the most common start hour
     #JP note to grader: code for most common start hour comes from Practice Problem #1 (few edits)
     df['hour'] = df['Start Time'].dt.hour
@@ -142,7 +142,7 @@ def time_stats(df):
     popular_hour = df['hour'].value_counts().idxmax()
     print('Most common hour:', popular_hour)
 
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -169,7 +169,7 @@ def station_stats(df):
     df['Trip'] = df['Start Station'] + ' to ' + df['End Station']
     popular_trip = df['Trip'].value_counts().idxmax()
     print("The most popular trip: ",popular_trip)
-    
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -222,12 +222,12 @@ def user_stats(df):
     try:
         earliest_year = df['Birth Year'].min()
         most_recent_year = df['Birth Year'].max()
-        most_common_year = df['Birth Year'].value_counts().idxmax()    
+        most_common_year = df['Birth Year'].value_counts().idxmax()
     except:
         print("Sorry, there is no birth year data for this city!")
     else:
         print("Earliest birth year: {} \nMost recent birth year: {} \nMost common birth year: {}".format(int(earliest_year),int(most_recent_year),int(most_common_year)))
-        
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
